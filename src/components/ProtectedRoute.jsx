@@ -15,7 +15,7 @@ import { useAuth } from '../hooks/useAuth';
 import LoadingSpinner from './LoadingSpinner';
 
 // Routes only for patients
-const PATIENT_ONLY_ROUTES = ['/my-bookings', '/booking'];
+const PATIENT_ONLY_ROUTES = ['/my-bookings', '/booking', '/hospitals', '/hospital'];
 
 // Routes only for hospital admins
 const HOSPITAL_ADMIN_ROUTES = ['/hospital-dashboard'];
@@ -69,16 +69,19 @@ const ProtectedRoute = ({ children }) => {
 
   // Check if hospital admin is trying to access patient-only routes
   if (user.role === 'HOSPITAL_ADMIN') {
-    const isPatientRoute = PATIENT_ONLY_ROUTES.some(route => 
+    // Check patient-only routes (be more specific to avoid false matches)
+    const patientOnlyPaths = ['/my-bookings', '/booking'];
+    const isPatientRoute = patientOnlyPaths.some(route => 
       currentPath.startsWith(route)
     );
-    if (isPatientRoute) {
-      return <Navigate to="/hospital-dashboard" replace />;
-    }
     
-    // Redirect hospital admin from home to dashboard
-    if (currentPath === '/') {
-      return <Navigate to="/hospital-dashboard" replace />;
+    // Also check hospital search/detail pages (but NOT hospital-dashboard)
+    const isHospitalSearchRoute = 
+      currentPath === '/hospitals' || 
+      (currentPath.startsWith('/hospital/') && !currentPath.startsWith('/hospital-dashboard'));
+    
+    if (isPatientRoute || isHospitalSearchRoute) {
+      return <Navigate to="/patient-access-denied" replace />;
     }
   }
 

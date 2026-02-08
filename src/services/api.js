@@ -55,6 +55,12 @@ export const specialtyAPI = {
 export const slotAPI = {
   getAll: (params = {}) => api.get('/slots', { params }),
   getById: (id) => api.get(`/slots/${id}`),
+  getByHospital: (hospitalId, params = {}) => api.get(`/slots/hospital/${hospitalId}`, { params }),
+  create: (data) => api.post('/slots', data),
+  update: (id, data) => api.put(`/slots/${id}`, data),
+  delete: (id) => api.delete(`/slots/${id}`),
+  toggle: (id) => api.patch(`/slots/${id}/toggle`),
+  close: (id) => api.patch(`/slots/${id}/close`),
 };
 
 // Bookings API (Updated for authenticated users)

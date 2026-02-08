@@ -13,9 +13,11 @@ import MyBookings from './pages/MyBookings';
 import BookingDetail from './pages/BookingDetail';
 import HospitalDashboard from './pages/HospitalDashboard';
 import HospitalAccessPage from './pages/HospitalAccessPage';
+import PatientAccessDenied from './pages/PatientAccessDenied';
 import Login from './pages/Login';
 import SelectRole from './pages/SelectRole';
 import CompleteProfile from './pages/CompleteProfile';
+import AddTimeSlot from './pages/AddTimeSlot';
 
 function App() {
   return (
@@ -50,7 +52,9 @@ function App() {
                     <Route path="/my-bookings" element={<MyBookings />} />
                     <Route path="/booking/:id" element={<BookingDetail />} />
                     <Route path="/hospital-dashboard" element={<HospitalDashboard />} />
+                    <Route path="/add-time-slot" element={<AddTimeSlot />} />
                     <Route path="/hospital-access" element={<HospitalAccessPage />} />
+                    <Route path="/patient-access-denied" element={<PatientAccessDenied />} />
                   </Routes>
                 </ProtectedRoute>
               } />
