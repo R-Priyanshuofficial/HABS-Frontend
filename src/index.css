@@ -1,0 +1,459 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   HABS - CALM MOTION DESIGN SYSTEM
+   Healthcare-focused UI/UX
+   ======================================== */
+
+/* CSS Variables - Motion Design Tokens */
+:root {
+  /* Durations */
+  --duration-instant: 150ms;
+  --duration-fast: 200ms;
+  --duration-normal: 250ms;
+  
+  /* Easing - Calm & Professional */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.6, 1);
+  
+  /* FINAL COLOR SYSTEM - Medical Blue Palette */
+  /* Primary - Medical Blue */
+  --color-primary: #0B5ED7;
+  --color-primary-hover: #094BB0;
+  --color-primary-light: #E7F1FF;
+  
+  /* Success - Healthcare Green */
+  --color-success: #1FA971;
+  --color-success-light: #E6FAF2;
+  
+  /* Danger/Error - Soft Medical Red */
+  --color-danger: #DC3545;
+  --color-danger-light: #FDEDED;
+  
+  /* Backgrounds - Premium Near-White System */
+  --color-bg: #F4F7FB;        /* Main page background - near-white with blue hint */
+  --color-surface: #FFFFFF;   /* Cards - pure white for contrast */
+  --color-section: #EEF3F9;   /* Section separators - subtle */
+  
+  /* Borders */
+  --color-border: #E2E8F0;
+  --color-border-default: #CBD5E1;
+  --color-border-focus: #0B5ED7;
+  
+  /* Text */
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
+  
+  /* DEPRECATED - For backwards compatibility */
+  --color-secondary: #0B5ED7;
+}
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Typography */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #F4F7FB; /* Premium near-white background */
+  color: var(--color-text-primary);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom Scrollbar - Subtle */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* ========================================
+   UTILITY CLASSES - CALM INTERACTIONS
+   ======================================== */
+
+@layer utilities {
+  /* Buttons - Calm & Confident */
+  .btn-calm {
+    transition: all var(--duration-fast) var(--ease-out);
+    will-change: transform, box-shadow;
+  }
+  
+  .btn-calm:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 76, 129, 0.15);
+  }
+  
+  .btn-calm:active:not(:disabled) {
+    transform: scale(0.98);
+    transition-duration: var(--duration-instant);
+  }
+  
+  .btn-calm:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Cards - Subtle Lift */
+  .card-lift {
+    transition: transform var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+    will-change: transform;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  }
+  
+  .card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.10);
+  }
+  
+  /* Premium Card Shadow - Medical Grade */
+  .shadow-medical {
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  }
+  
+  .shadow-medical-lg {
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  }
+  
+  /* Inputs - Focused & Clear */
+  .input-calm {
+    transition: all var(--duration-normal) var(--ease-out);
+    border: 2px solid var(--color-border);
+  }
+  
+  .input-calm:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.08);
+  }
+  
+  .input-calm::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+  }
+  
+  /* Focus States - Healthcare Safe */
+  .focus-ring:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.15);
+    border-color: var(--color-primary);
+  }
+  
+  /* Fade In - Page Entrance */
+  .fade-in {
+    animation: fadeIn var(--duration-normal) var(--ease-out);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Selection Pills - Gender/Role */
+  .pill-select {
+    transition: all var(--duration-fast) var(--ease-out);
+    cursor: pointer;
+  }
+  
+  .pill-select:hover {
+    transform: scale(1.02);
+  }
+  
+  .pill-select.active {
+    background-color: rgba(15, 76, 129, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  
+  /* Shimmer Loading - Subtle */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  /* Page Transition */
+  .page-transition {
+    animation: pageEnter var(--duration-normal) var(--ease-out);
+  }
+  
+  @keyframes pageEnter {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Stagger Animation - Lists */
+  .stagger-item {
+    animation: fadeInUp var(--duration-normal) var(--ease-out) backwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Glass Effect - NO GRADIENT */
+  .glass-surface {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border);
+  }
+}
+
+/* ========================================
+   TOAST NOTIFICATIONS - CALM & CLEAR
+   ======================================== */
+
+/* Container */
+.Toastify__toast-container {
+  width: 380px !important;
+  padding: 0 !important;
+}
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    width: 100vw !important;
+    padding: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* Individual Toast */
+.Toastify__toast {
+  border-radius: 12px !important;
+  padding: 16px 20px !important;
+  margin-bottom: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  min-height: 64px !important;
+  backdrop-filter: blur(8px) !important;
+  animation: slideInRight 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Success Toast */
+.Toastify__toast--success {
+  background: #1E9E6A !important;
+  color: white !important;
+  border-left: 4px solid #16865a !important;
+}
+
+.Toastify__toast--success .Toastify__toast-icon {
+  color: white !important;
+}
+
+/* Error Toast */
+.Toastify__toast--error {
+  background: #D64545 !important;
+  color: white !important;
+  border-left: 4px solid #b63636 !important;
+}
+
+.Toastify__toast--error .Toastify__toast-icon {
+  color: white !important;
+}
+
+/* Info Toast */
+.Toastify__toast--info {
+  background: #0F4C81 !important;
+  color: white !important;
+  border-left: 4px solid #0a3359 !important;
+}
+
+.Toastify__toast--info .Toastify__toast-icon {
+  color: white !important;
+}
+
+/* Warning Toast */
+.Toastify__toast--warning {
+  background: #F59E0B !important;
+  color: white !important;
+  border-left: 4px solid #d97706 !important;
+}
+
+.Toastify__toast--warning .Toastify__toast-icon {
+  color: white !important;
+}
+
+/* Toast Body - Larger, clearer text */
+.Toastify__toast-body {
+  padding: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  font-weight: 500 !important;
+}
+
+/* Progress Bar */
+.Toastify__progress-bar {
+  height: 3px !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.Toastify__progress-bar--success {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+
+.Toastify__progress-bar--error {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+
+.Toastify__progress-bar--info {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+
+.Toastify__progress-bar--warning {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Close Button */
+.Toastify__close-button {
+  color: white !important;
+  opacity: 0.8 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.Toastify__close-button:hover {
+  opacity: 1 !important;
+}
+
+/* Slide In Animation */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide Out Animation */
+.Toastify__toast--closing {
+  animation: slideOutRight 0.2s cubic-bezier(0.4, 0, 1, 1) forwards !important;
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+}
+
+/* Remove default bouncing */
+.Toastify__bounce-enter--top-right,
+.Toastify__bounce-enter--bottom-right {
+  animation-name: slideInRight !important;
+}
+
+.Toastify__bounce-exit--top-right,
+.Toastify__bounce-exit--bottom-right {
+  animation-name: slideOutRight !important;
+}
+
+
+/* ========================================
+   FRAMER MOTION VARIANTS - PRESET
+   ======================================== */
+
+/* These can be imported in React components */
+/*
+export const calmVariants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
+  }
+};
+
+export const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05
+    }
+  }
+};
+*/
